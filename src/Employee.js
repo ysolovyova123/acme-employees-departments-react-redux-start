@@ -1,6 +1,7 @@
 import React from 'react';
+import { destroyEmployee, removeFromDepartment} from './store';
 
-const Employee = ({ employee, destroyEmployee, removeFromDepartment })=> {
+const Employee = ({ employee })=> {
   return (
     <li key={ employee.id }>
       { employee.name }

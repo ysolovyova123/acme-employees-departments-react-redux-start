@@ -1,18 +1,19 @@
 import React from 'react';
 import Department from './Department';
-const Departments = ({ departments, employees, destroyEmployee, removeFromDepartment })=> {
+import { connect } from 'react-redux';
+import { destroyEmployee, removeFromDepartment} from './store';
+//import { ProgressPlugin } from 'webpack';
+
+const Departments = (props)=> {
   return (
     <ul className='departments'>
-      <Department destroyEmployee={ destroyEmployee } employees={ employees } />
+      <Department destroyEmployee={ destroyEmployee } employees={ props.employees } />
       {
-        departments.map( department => {
+        props.departments.map( department => {
           return (
             <Department
               key = { department.id }
-              department = { department }
-              employees = { employees }
-              destroyEmployee = { destroyEmployee }
-              removeFromDepartment = { removeFromDepartment }
+              department = {department}
             />
           );
         })
@@ -21,4 +22,11 @@ const Departments = ({ departments, employees, destroyEmployee, removeFromDepart
   );
 }
 
-export default Departments;
+const mapStateToProps = (state) => {
+  return {
+    departments: state.departments,
+    employees: state.employees
+  }
+};
+
+export default connect(mapStateToProps)(Departments); // connect(mapState) is the container component that will get the employees from state, and then pass it in as props to State up top

@@ -1,11 +1,12 @@
 import React from 'react';
 import Employee from './Employee';
 
-const Employees = ({ department, employees, removeFromDepartment, destroyEmployee })=> {
+const Employees = ({ employees })=> {
   return (
       <ul>
         {
-          employees.filter( employee => employee.departmentId === (department ? department.id : null )).map( employee => <Employee employee={ employee } removeFromDepartment={ removeFromDepartment } destroyEmployee={ destroyEmployee } key={ employee.id }/>)
+          employees.filter( employee => employee.departmentId === (department ? department.id : null )).map( employee =>
+            <Employee key={ employee.id } employee={ employee } />)
         }
       </ul>
   );
