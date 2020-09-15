@@ -4,7 +4,7 @@ import axios from 'axios'
 import Departments from './Departments';
 import Stats from './Stats';
 import store from './store'
-import { setInitialState } from './store'
+import { fetchEmployees, fetchDepartments } from './store'
 
 class App extends React.Component{
   constructor(props){
@@ -12,9 +12,11 @@ class App extends React.Component{
   }
 
   async componentDidMount(){
-    console.log(store.getState())
-    setInitialState() // axios call to fill in empty employee and departments arrays with actual data from db
+    //console.log(this.props)
+    // console.log(props.departments)
     // console.log(store.getState())
+    this.props.fetchEmployees(),
+    this.props.fetchDepartments()
   }
 
   render(){
@@ -35,4 +37,15 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(App); // connect(mapState) is the container component that will get the groceries from state, and then pass it in as props to GroceryList up top
+const mapDispatchToProps = (dispatch) => {
+  return { // the returned stuff gets passed in as props to GroceryItem above
+    fetchEmployees: () => { // 'toggle' can be named anything we want
+      dispatch(fetchEmployees()); // but this needs to match exactly (toggleGrocery) what's in the store
+    },
+    fetchDepartments: () => { // 'toggle' can be named anything we want
+      dispatch(fetchDepartments()); // but this needs to match exactly (toggleGrocery) what's in the store
+    }
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App); // connect(mapState) is the container component that will get the groceries from state, and then pass it in as props to GroceryList up top

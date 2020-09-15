@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import store from './store'
 
 const Stats = ({ employees })=> {
-  console.log(store.getState())
+  //console.log(employees)
   return (
     <p>{ employees.length } Total Employees</p>
   );

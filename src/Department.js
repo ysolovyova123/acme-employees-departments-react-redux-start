@@ -3,16 +3,16 @@ import Employees from './Employees';
 import { connect } from 'react-redux';
 //import { ProgressPlugin } from 'webpack';
 
-const Department = ({department})=> {
+const Department = ({department, employees})=> { // this is a stateless component, so you can define props in the (), but if you don't have class, can't use this or this.props.element implicitly
     return (
       <li>
         <span className='department-title'>
           { department ? department.name : 'No Department' } ({
-            props.employees.filter( employee => employee.departmentId === (department ? department.id : null) ).length
+            employees.filter( employee => employee.departmentId === (department ? department.id : null) ).length
           })
         </span>
         <Employees
-          employees ={ props.employees }
+          employees ={ employees } department = {department}
         />
       </li>
     );

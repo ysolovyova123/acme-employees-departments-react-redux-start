@@ -1,7 +1,7 @@
 import React from 'react';
 import Employee from './Employee';
 
-const Employees = ({ employees })=> {
+const Employees = ({ employees, department})=> {
   return (
       <ul>
         {
